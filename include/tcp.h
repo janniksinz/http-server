@@ -1,6 +1,7 @@
 #ifndef TCP_H
 #define TCP_H
 
+#include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>
 #include <unistd.h>
