@@ -13,4 +13,14 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 
 all: $(TARGET)
 
-$(TARGET): $(OBJ_FILES)
+$(TARGET): $(OBJ_FILES) | $(BIN_DIR)
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -C $< -O $@
+
+$(OBJ_DIR):
+	mkdir -p $(BIN_DIR)
+
+clean:
+	rm -rf $(OBJ_DIR) $(BIN_DIR)

@@ -1,5 +1,6 @@
 #include "main.h"
 #include "tcp.h"
+#include <stdlib.h>
 
 int main() {
 	tcp_server server = {0};
@@ -11,14 +12,14 @@ int main() {
 
 	int client_fd = accept_client(server.socket_fd);
 	if (client_fd == -1) {
-		debug_log("main: Failed to accept client connection");
+		debug_log("main: failed to accept client connection");
 		close(server.socket_fd);
 		exit(EXIT_FAILURE);
 	}
 
-	debug_log("Client connected");
+	debug_log("Client connected!");
 
 	close(client_fd);
-	clone(server.socked_fd);
+	close(server.socket_fd);
 	return 0;
 }
